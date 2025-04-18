@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Table Example</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        input[type="text"] {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Search Table</h2>
+
+<input type="text" id="searchInput" placeholder=" 🔍   Search by name">
+
+<table id="myTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>John Doe</td>
+            <td>25</td>
+            <td>USA</td>
+        </tr>
+        <tr>
+            <td>Jane Doe</td>
+            <td>30</td>
+            <td>Canada</td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </tbody>
+</table>
+
+<script>
+    // Get the input element and table
+    const input = document.getElementById('searchInput');
+    const table = document.getElementById('myTable');
+    const rows = table.getElementsByTagName('tr');
+
+    // Add an event listener to the input element
+    input.addEventListener('input', function () {
+        const filter = input.value.toLowerCase();
+
+        // Use the filter method to show/hide rows based on input
+        Array.from(rows).slice(1).forEach(row => {
+            const cells = Array.from(row.getElementsByTagName('td'));
+            const shouldShow = cells.some(cell => cell.textContent.toLowerCase().includes(filter));
+            row.style.display = shouldShow ? '' : 'none';
+        });
+    });
+</script>
+
+</body>
+</html>
